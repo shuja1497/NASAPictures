@@ -1,8 +1,9 @@
-package com.example.nasapictures
+package com.example.nasapictures.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.nasapictures.ui.main.GridFragment
+import androidx.appcompat.app.AppCompatActivity
+import com.example.nasapictures.R
+import com.example.nasapictures.ui.grid.GridFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,8 +12,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, GridFragment.newInstance())
-                    .commitNow()
+                .replace(R.id.container, GridFragment.newInstance())
+                .commitNow()
         }
     }
 }

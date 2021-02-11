@@ -1,4 +1,4 @@
-package com.example.nasapictures.ui.main
+package com.example.nasapictures.ui.grid
 
 import android.os.Bundle
 import android.view.LayoutInflater

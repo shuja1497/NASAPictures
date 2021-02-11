@@ -1,4 +1,4 @@
-package com.example.nasapictures.ui.main
+package com.example.nasapictures.ui.grid
 
 import androidx.lifecycle.ViewModel
 
