@@ -1,6 +1,7 @@
 package com.example.nasapictures.ui.grid
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,8 +22,10 @@ class GridFragment : Fragment() {
     private var _binding: GridFragmentBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
 
         _binding = GridFragmentBinding.inflate(inflater, container, false)
         return binding.root
@@ -40,10 +43,8 @@ class GridFragment : Fragment() {
 
             when (it) {
                 is Success -> {
-
                 }
                 is Failure -> {
-
                 }
             }
 
