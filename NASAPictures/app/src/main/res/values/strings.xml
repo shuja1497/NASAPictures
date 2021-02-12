@@ -3,4 +3,6 @@
     <string name="parsing_error_msg">Error in parsing file</string>
     <string name="no_pics_found_msg">No pictures found</string>
     <string name="image_fetch_error_msg">Error occurred while fetching images!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
