@@ -93,6 +93,8 @@ class PicturesDetailSwipingFragment : Fragment() {
 
     companion object {
 
+        const val TAG = "PicturesDetailSwipingFragment"
+
         @JvmStatic
         fun newInstance() =
             PicturesDetailSwipingFragment().apply {

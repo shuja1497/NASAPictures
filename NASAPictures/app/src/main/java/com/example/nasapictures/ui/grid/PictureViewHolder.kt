@@ -9,7 +9,10 @@ import com.example.nasapictures.model.Picture
 class PictureViewHolder(private val binding: PictureItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(picture: Picture) {
+    fun bind(
+        picture: Picture,
+        clickListener: (Picture) -> Unit
+    ) {
         with(binding) {
             Glide.with(pictureImageView.context)
                 .load(picture.url)
@@ -18,6 +21,8 @@ class PictureViewHolder(private val binding: PictureItemBinding) :
                 .into(pictureImageView)
 
             pictureTitleTv.text = picture.title
+
+            root.setOnClickListener { clickListener(picture) }
         }
     }
 }

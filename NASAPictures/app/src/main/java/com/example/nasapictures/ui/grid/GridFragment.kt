@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,7 +14,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.nasapictures.R
 import com.example.nasapictures.databinding.GridFragmentBinding
 import com.example.nasapictures.model.Failure
+import com.example.nasapictures.model.Picture
 import com.example.nasapictures.model.Success
+import com.example.nasapictures.ui.detail.PicturesDetailSwipingFragment
 import com.example.nasapictures.ui.main.PictureViewModel
 
 class GridFragment : Fragment() {
@@ -25,7 +28,8 @@ class GridFragment : Fragment() {
     private lateinit var viewModel: PictureViewModel
     private var _binding: GridFragmentBinding? = null
     private val binding get() = _binding!!
-    private val picturesAdapter = PicturesAdapter(arrayListOf())
+    private val picturesAdapter =
+        PicturesAdapter(arrayListOf()) { picture: Picture -> onPictureClicked(picture) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,10 +52,23 @@ class GridFragment : Fragment() {
         observeViewModel()
     }
 
+    private fun onPictureClicked(picture: Picture) {
+
+        activity?.let {
+            it.supportFragmentManager
+                .beginTransaction()
+                .add(R.id.container, PicturesDetailSwipingFragment.newInstance())
+                .addToBackStack(null)
+                .commit()
+        } ?: Toast.makeText(requireContext(), picture.title, Toast.LENGTH_SHORT).show()
+    }
+
     private fun initViews() {
         with(binding) {
-            picturesRv.layoutManager = StaggeredGridLayoutManager(3,
-                GridLayoutManager.VERTICAL)
+            picturesRv.layoutManager = StaggeredGridLayoutManager(
+                3,
+                GridLayoutManager.VERTICAL
+            )
             picturesRv.adapter = picturesAdapter
         }
     }
