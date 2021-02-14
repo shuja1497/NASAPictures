@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.nasapictures.R
 import com.example.nasapictures.databinding.PictureDetailSwipingFragmentBinding
 import com.example.nasapictures.model.Failure
+import com.example.nasapictures.model.Picture
 import com.example.nasapictures.model.Success
 import com.example.nasapictures.ui.main.PictureViewModel
 import com.example.nasapictures.utils.DepthPageTransformer
@@ -27,7 +28,7 @@ class PicturesDetailSwipingFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-//            url = it.getString(ARG_PARAM)
+            url = it.getString(ARG_URL)
         }
     }
 
@@ -67,6 +68,14 @@ class PicturesDetailSwipingFragment : Fragment() {
                 is Success -> {
                     binding.errorMsgTv.isVisible = false
                     picturesDetailAdapter.updateData(it.value)
+
+                    url?.let { url ->
+                        binding.picturesViewPager.setCurrentItem(
+                            picturesDetailAdapter.getItemIndex(
+                                url
+                            ), false
+                        )
+                    }
                 }
 
                 is Failure -> {
@@ -93,14 +102,17 @@ class PicturesDetailSwipingFragment : Fragment() {
 
     companion object {
 
+        private const val ARG_URL = "picture_url"
         const val TAG = "PicturesDetailSwipingFragment"
 
         @JvmStatic
-        fun newInstance() =
-            PicturesDetailSwipingFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM, url)
-//                }
+        fun newInstance(picture: Picture): PicturesDetailSwipingFragment {
+            val fragment = PicturesDetailSwipingFragment()
+            fragment.arguments = Bundle().apply {
+                putString(ARG_URL, picture.url)
             }
+            return fragment
+        }
+
     }
 }

@@ -16,6 +16,22 @@ class PicturesDetailAdapter(private var pictures: MutableList<Picture>) :
         notifyDataSetChanged()
     }
 
+    fun getItemIndex(url: String?): Int {
+
+        val picture = getItemFromURL(url)
+        val index = pictures.indexOf(picture)
+
+        return if (index < 0) {
+            0
+        } else {
+            index
+        }
+    }
+
+    private fun getItemFromURL(url: String?): Picture? {
+        return pictures.find { it.url == url }
+    }
+
     override fun getItemCount(): Int = pictures.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PictureDetailViewHolder {

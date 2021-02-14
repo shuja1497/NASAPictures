@@ -57,7 +57,7 @@ class GridFragment : Fragment() {
         activity?.let {
             it.supportFragmentManager
                 .beginTransaction()
-                .add(R.id.container, PicturesDetailSwipingFragment.newInstance())
+                .add(R.id.container, PicturesDetailSwipingFragment.newInstance(picture))
                 .addToBackStack(null)
                 .commit()
         } ?: Toast.makeText(requireContext(), picture.title, Toast.LENGTH_SHORT).show()
