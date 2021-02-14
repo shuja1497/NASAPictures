@@ -1,4 +1,4 @@
-package com.example.nasapictures.ui.grid
+package com.example.nasapictures.ui.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,31 +8,34 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.nasapictures.R
-import com.example.nasapictures.databinding.GridFragmentBinding
+import com.example.nasapictures.databinding.PictureDetailSwipingFragmentBinding
 import com.example.nasapictures.model.Failure
 import com.example.nasapictures.model.Success
 import com.example.nasapictures.ui.main.PictureViewModel
 
-class GridFragment : Fragment() {
+class PicturesDetailSwipingFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = GridFragment()
-    }
-
+    private var url: String? = null
     private lateinit var viewModel: PictureViewModel
-    private var _binding: GridFragmentBinding? = null
+    private var _binding: PictureDetailSwipingFragmentBinding? = null
     private val binding get() = _binding!!
-    private val picturesAdapter = PicturesAdapter(arrayListOf())
+    private val picturesDetailAdapter = PicturesDetailAdapter(arrayListOf())
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+//            url = it.getString(ARG_PARAM)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-
-        _binding = GridFragmentBinding.inflate(inflater, container, false)
+    ): View? {
+        // Inflate the layout for this fragment
+        _binding = PictureDetailSwipingFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -48,11 +51,10 @@ class GridFragment : Fragment() {
         observeViewModel()
     }
 
+
     private fun initViews() {
         with(binding) {
-            picturesRv.layoutManager = StaggeredGridLayoutManager(3,
-                GridLayoutManager.VERTICAL)
-            picturesRv.adapter = picturesAdapter
+            picturesViewPager.adapter = picturesDetailAdapter
         }
     }
 
@@ -62,7 +64,7 @@ class GridFragment : Fragment() {
             when (it) {
                 is Success -> {
                     binding.errorMsgTv.isVisible = false
-                    picturesAdapter.updateData(it.value)
+                    picturesDetailAdapter.updateData(it.value)
                 }
 
                 is Failure -> {
@@ -87,4 +89,14 @@ class GridFragment : Fragment() {
         _binding = null
     }
 
+    companion object {
+
+        @JvmStatic
+        fun newInstance() =
+            PicturesDetailSwipingFragment().apply {
+//                arguments = Bundle().apply {
+//                    putString(ARG_PARAM, url)
+//                }
+            }
+    }
 }

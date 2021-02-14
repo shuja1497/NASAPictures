@@ -1,4 +1,4 @@
-package com.example.nasapictures.ui.grid
+package com.example.nasapictures.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +13,7 @@ import com.example.nasapictures.model.Success
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class GridViewModel : ViewModel() {
+class PictureViewModel : ViewModel() {
 
     private val _pictures = MutableLiveData<Response>()
     val pictures: LiveData<Response> = _pictures

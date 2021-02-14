@@ -3,6 +3,7 @@ package com.example.nasapictures.ui.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nasapictures.R
+import com.example.nasapictures.ui.detail.PicturesDetailSwipingFragment
 import com.example.nasapictures.ui.grid.GridFragment
 
 class MainActivity : AppCompatActivity() {
@@ -12,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, GridFragment.newInstance())
+                .replace(R.id.container, PicturesDetailSwipingFragment.newInstance())
                 .commitNow()
         }
     }
