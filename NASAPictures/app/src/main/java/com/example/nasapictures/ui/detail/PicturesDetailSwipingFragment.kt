@@ -13,6 +13,7 @@ import com.example.nasapictures.databinding.PictureDetailSwipingFragmentBinding
 import com.example.nasapictures.model.Failure
 import com.example.nasapictures.model.Success
 import com.example.nasapictures.ui.main.PictureViewModel
+import com.example.nasapictures.utils.DepthPageTransformer
 
 class PicturesDetailSwipingFragment : Fragment() {
 
@@ -55,6 +56,7 @@ class PicturesDetailSwipingFragment : Fragment() {
     private fun initViews() {
         with(binding) {
             picturesViewPager.adapter = picturesDetailAdapter
+            picturesViewPager.setPageTransformer(DepthPageTransformer())
         }
     }
 
