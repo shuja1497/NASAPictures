@@ -16,6 +16,7 @@ import com.example.nasapictures.model.Success
 import com.example.nasapictures.ui.main.PictureViewModel
 import com.example.nasapictures.utils.DepthPageTransformer
 
+
 class PicturesDetailSwipingFragment : Fragment() {
 
     private var url: String? = null
@@ -38,21 +39,22 @@ class PicturesDetailSwipingFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = PictureDetailSwipingFragmentBinding.inflate(inflater, container, false)
+
+        savedInstanceState?.let {
+            url = savedInstanceState.getString(ARG_URL)
+        }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews()
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(PictureViewModel::class.java)
+
+        initViews()
         getData()
         observeViewModel()
     }
-
 
     private fun initViews() {
         with(binding) {
@@ -93,6 +95,18 @@ class PicturesDetailSwipingFragment : Fragment() {
 
     private fun getData() {
         viewModel.getAllPictures()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+
+        picturesDetailAdapter.getItemByPosition(binding.picturesViewPager.currentItem)?.let {
+            outState.putString(
+                ARG_URL,
+                it.url
+            )
+        }
+
+        super.onSaveInstanceState(outState)
     }
 
     override fun onDestroyView() {

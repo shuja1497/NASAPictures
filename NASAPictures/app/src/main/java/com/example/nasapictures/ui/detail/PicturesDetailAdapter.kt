@@ -32,6 +32,15 @@ class PicturesDetailAdapter(private var pictures: MutableList<Picture>) :
         return pictures.find { it.url == url }
     }
 
+    fun getItemByPosition(position: Int): Picture? {
+
+        return if (position <= pictures.size) {
+            pictures[position]
+        } else {
+            null
+        }
+    }
+
     override fun getItemCount(): Int = pictures.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PictureDetailViewHolder {
