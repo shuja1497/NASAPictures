@@ -4,6 +4,7 @@ import com.example.nasapictures.init.AppController
 import com.example.nasapictures.model.Picture
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.delay
 import java.io.IOException
 import java.nio.charset.Charset
 
@@ -31,10 +32,6 @@ object PictureDataSource {
     } catch (ex: IOException) {
         ex.printStackTrace()
         ""
-    }
-
-    suspend fun getPictureDetailByUrl() {
-
     }
 
 }

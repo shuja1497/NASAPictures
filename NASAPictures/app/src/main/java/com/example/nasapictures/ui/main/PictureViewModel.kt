@@ -11,6 +11,7 @@ import com.example.nasapictures.model.Failure
 import com.example.nasapictures.model.Response
 import com.example.nasapictures.model.Success
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class PictureViewModel : ViewModel() {
@@ -20,27 +21,26 @@ class PictureViewModel : ViewModel() {
 
     fun getAllPictures() {
 
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.Main) {
             try {
-                val pictures = PictureDataSource.getAllPictures()
+                val pictures = try {
+                    async(Dispatchers.IO) {
+                        return@async PictureDataSource.getAllPictures()
+                    }.await()
+                } catch (e: java.lang.Exception) {
+                    null
+                }
 
                 if (pictures != null) {
-                    _pictures.postValue(Success(pictures))
+                    _pictures.value = Success(pictures)
                 } else {
-                    _pictures.postValue(
-                        Failure(
-                            AppController.instance.getString(R.string.no_pics_found_msg),
-                            null
-                        )
-                    )
+                    _pictures.value =
+                        Failure(AppController.instance.getString(R.string.no_pics_found_msg), null)
                 }
             } catch (e: Exception) {
-                _pictures.postValue(
-                    Failure(
-                        AppController.instance.getString(R.string.parsing_error_msg),
-                        e
-                    )
-                )
+                _pictures.value =
+                    Failure(AppController.instance.getString(R.string.parsing_error_msg), e)
+
             }
         }
     }
