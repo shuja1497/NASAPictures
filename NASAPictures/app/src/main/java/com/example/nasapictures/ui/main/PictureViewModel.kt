@@ -18,6 +18,7 @@ class PictureViewModel : ViewModel() {
 
     private val _pictures = MutableLiveData<Response>()
     val pictures: LiveData<Response> = _pictures
+    val fileName = "obvious_data.json"
 
     fun getAllPictures() {
 
@@ -25,7 +26,7 @@ class PictureViewModel : ViewModel() {
             try {
                 val pictures = try {
                     async(Dispatchers.IO) {
-                        return@async PictureDataSource.getAllPictures()
+                        return@async PictureDataSource.getAllPictures(fileName)
                     }.await()
                 } catch (e: java.lang.Exception) {
                     null
