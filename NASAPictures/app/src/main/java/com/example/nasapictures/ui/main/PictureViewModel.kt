@@ -18,7 +18,7 @@ class PictureViewModel : ViewModel() {
 
     private val _pictures = MutableLiveData<Response>()
     val pictures: LiveData<Response> = _pictures
-    val fileName = "obvious_data.json"
+    private val fileName = "obvious_data.json"
 
     fun getAllPictures() {
 
