@@ -1,6 +1,6 @@
 # NASAPictures
 
-The projects is based on MVVM architecture pattern using coroutines, livedata and viewmodel.
+The projects is based on MVVM architecture pattern using coroutines, livedata, viewmodel, viewpager2.
 
 
 ### Screenshots
