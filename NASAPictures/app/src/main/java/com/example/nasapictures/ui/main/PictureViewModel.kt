@@ -10,8 +10,6 @@ import com.example.nasapictures.init.AppController
 import com.example.nasapictures.model.Failure
 import com.example.nasapictures.model.Response
 import com.example.nasapictures.model.Success
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class PictureViewModel : ViewModel() {
@@ -22,12 +20,10 @@ class PictureViewModel : ViewModel() {
 
     fun getAllPictures() {
 
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch {
             try {
                 val pictures = try {
-                    async(Dispatchers.IO) {
-                        return@async PictureDataSource.getAllPictures(fileName)
-                    }.await()
+                    PictureDataSource.getAllPictures(fileName)
                 } catch (e: java.lang.Exception) {
                     null
                 }

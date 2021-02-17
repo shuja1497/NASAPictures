@@ -11,32 +11,6 @@ import org.junit.runner.RunWith
 class PictureDataSourceTest {
 
     @Test
-    fun loadFromAsset_correctFileName_returnsPicturesString() {
-
-        val fileName = "obvious_data.json"
-        runBlocking {
-            val pictures =
-                PictureDataSource.loadJSONFromAsset(
-                    fileName
-                )
-            assertNotEquals("", pictures)
-        }
-    }
-
-    @Test
-    fun loadFromAsset_inCorrectFileName_returnsEmptyString() {
-
-        val fileName = "obs_data.json"
-        runBlocking {
-            val pictures =
-                PictureDataSource.loadJSONFromAsset(
-                    fileName
-                )
-            assertEquals("", pictures)
-        }
-    }
-
-    @Test
     fun getAllPictures_correctFileName_returnsPicturesList() {
 
         val fileName = "obvious_data.json"
