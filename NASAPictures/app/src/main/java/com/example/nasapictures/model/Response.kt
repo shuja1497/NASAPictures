@@ -9,3 +9,4 @@ data class Failure(
     val throwable: Throwable?
 ) : Response()
 
+data class Dummy(val value: Picture): Response()

@@ -8,6 +8,7 @@ import com.example.nasapictures.R
 import com.example.nasapictures.data.PictureDataSource
 import com.example.nasapictures.init.AppController
 import com.example.nasapictures.model.Failure
+import com.example.nasapictures.model.Picture
 import com.example.nasapictures.model.Response
 import com.example.nasapictures.model.Success
 import kotlinx.coroutines.launch
@@ -42,4 +43,14 @@ class PictureViewModel : ViewModel() {
         }
     }
 
+    fun addPicture(pictures: ArrayList<Picture>?) {
+
+        pictures?.let {
+            _pictures.value = Success(pictures)
+        } ?: run {
+            _pictures.value =
+                Failure(AppController.instance.getString(R.string.no_pics_found_msg), null)
+
+        }
+    }
 }
